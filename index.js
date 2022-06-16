@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   console.log(req.body);
-  const { content, subject, name } = req.body;
+  const { content, subject, name, toEmail, fromEmail, attachment } = req.body;
 
   async function main() {
     nodemailer.createTestAccount((err, account) => {
@@ -52,8 +52,8 @@ app.post("/", (req, res) => {
       });
 
       const message = {
-        from: "priyanshi.sachan@iwebcode.net", // Sender address
-        to: "priyanshianamika@gmail.com", // List of recipients
+        from: `${fromEmail}`, // Sender address
+        to: `${toEmail}`, // List of recipients
         subject: `${subject}`, // Subject line
         text: `${name} \n ${content}`, // Plain text body or html script
         attachments: [

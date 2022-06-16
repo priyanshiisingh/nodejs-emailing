@@ -26,15 +26,21 @@
 <body>
     <form action="/" method="POST" id="sendEmail-form">
         <h1>Send email form</h1>
+
+        <div class="mb-3">
+            <label for="fromEmail" class="form-label">Send Email From :</label>
+            <input type="email" class="form-control" id="fromEmail" name="fromEmail" aria-describedby="emailHelp" />
+        </div>
+
         <div class="mb-3">
             <label for="name" class="form-label">Name :</label>
             <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" />
         </div>
 
-        <!-- <div class="mb-3">
-            <label for="email" class="form-label">Send Email to :</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email address" />
-        </div> -->
+        <div class="mb-3">
+            <label for="toEmail" class="form-label">Send Email to :</label>
+            <input type="email" class="form-control" id="toEmail" name="toEmail" aria-describedby="emailHelp" />
+        </div>
 
         <div class="mb-3">
             <label for="subject" class="form-label">Subject :</label>
@@ -49,7 +55,7 @@
         <!-- <div class="mb-3">
             <label for="attchment" class="form-label">Attachment(if any):</label>
 
-            <input type="file" class="form-control" id="attchment" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+            <input type="file" class="form-control" id="attchment" name="attachment" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
         </div> -->
 
         <button type="submit" class="btn btn-primary">Submit</button>
