@@ -10,16 +10,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
+app.use(express.static("views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.set("public", path.join(__dirname, "public"));
-// app.set("view engine", "ejs");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.render(__dirname + "/views/index.ejs");
+  res.render(path.join(__dirname, "./views/index.ejs"));
 });
 
 //Using SMTP for Nodemailer Transport
@@ -27,16 +26,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   console.log(req.body);
-  const { content, name, email, subject } = req.body;
-  const emailContent = `
-    <h3>Contact Info</h3>
-    <ul>
-        <li>Name: ${name}</li>
-        <li>Email: ${email}</li>
-        <li>Message: ${content} </li>
-    </ul>
-    <h3>Message finished</h3>
-  `;
+  const { content, subject, name } = req.body;
 
   async function main() {
     nodemailer.createTestAccount((err, account) => {
@@ -65,7 +55,7 @@ app.post("/", (req, res) => {
         from: "priyanshi.sachan@iwebcode.net", // Sender address
         to: "priyanshianamika@gmail.com", // List of recipients
         subject: `${subject}`, // Subject line
-        html: emailContent, // Plain text body or html script
+        text: `${name} \n ${content}`, // Plain text body or html script
         attachments: [
           {
             // Use a URL as an attachment
