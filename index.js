@@ -28,6 +28,8 @@ app.post("/", (req, res) => {
   console.log(req.body);
   const { content, subject, name, toEmail, fromEmail, attachment } = req.body;
 
+  console.log(`${attachment.name}`);
+
   async function main() {
     nodemailer.createTestAccount((err, account) => {
       if (err) {
@@ -59,11 +61,13 @@ app.post("/", (req, res) => {
         attachments: [
           {
             // Use a URL as an attachment
-            filename: "your-testla.png",
+            filename: `${attachment}`,
             path: "https://media.gettyimages.com/photos/view-of-tesla-model-s-in-barcelona-spain-on-september-10-2018-picture-id1032050330?s=2048x2048",
           },
         ],
       };
+      //for now the path is static but the file name will change with the file selected
+
       transporter.sendMail(message, function (err, info) {
         if (err) {
           console.log(err);
